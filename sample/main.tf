@@ -58,17 +58,6 @@ module "aks" {
   }
 }
 
-module "app" {
-  source     = "git::https://github.com/danielscholl-terraform/module-env-debug?ref=v1.0.0"
-  depends_on = [module.aks]
-
-  providers = { helm = helm.aks }
-
-  namespace                   = "default"
-  kubernetes_create_namespace = false
-  agent_pool                  = ""
-}
-
 module "nginx" {
   source     = "../"
   depends_on = [module.aks]
@@ -80,4 +69,12 @@ module "nginx" {
   kubernetes_create_namespace = true
 }
 
+module "app" {
+  source     = "./app"
+  depends_on = [module.nginx]
 
+  providers = { helm = helm.aks }
+
+  namespace                   = "default"
+  kubernetes_create_namespace = false
+}
