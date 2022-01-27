@@ -68,3 +68,9 @@ variable "ingress_type" {
     error_message = "Value of ingress_type must be one of 'Internal' or 'Public'."
   }
 }
+
+variable "dns_label" {
+  description = "DNS label for building the FQDN of the Ingress controller."
+  type        = string
+  default     = "iac-terraform"
+}
