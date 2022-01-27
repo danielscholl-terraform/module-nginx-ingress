@@ -64,8 +64,7 @@ resource "azurerm_public_ip" "main" {
   location            = module.resource_group.location
   allocation_method   = "Static"
 
-  sku               = "Standard"
-  domain_name_label = format("iac-terraform-%s", module.resource_group.random)
+  sku = "Standard"
 
   tags = {
     iac = "terraform"
@@ -83,6 +82,7 @@ module "nginx" {
   kubernetes_create_namespace = true
 
   load_balancer_ip = azurerm_public_ip.main.ip_address
+  dns_label        = format("sample-%s", module.resource_group.random)
 }
 
 module "app" {

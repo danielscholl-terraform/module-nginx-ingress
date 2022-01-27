@@ -29,14 +29,11 @@ resource "helm_release" "nginx" {
         }
         service = {
           loadBalancerIP = var.load_balancer_ip
-          annotations = {
+          annotations = var.ingress_type == "Internal" ? {
+            "service.beta.kubernetes.io/azure-load-balancer-internal" : "true"
+            } : {
             "service.beta.kubernetes.io/azure-dns-label-name" : var.dns_label
           }
-          # annotations = var.ingress_type == "Internal" ? {
-          #   "service.beta.kubernetes.io/azure-load-balancer-internal" : "true"
-          # } : {
-          #   "service.beta.kubernetes.io/azure-dns-label-name" : var.dns_label
-          # }
         }
       }
     }),
