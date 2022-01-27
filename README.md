@@ -107,6 +107,7 @@ module "nginx" {
 |------|-------------|------|---------|:-----:|
 | additional\_yaml\_config | yaml config for helm chart to be processed last | `string` | `""` | no |
 | chart\_version | HELM Chart Version for nginx controller | `string` | `"4.0.6"` | no |
+| dns\_label | DNS label for building the FQDN of the Ingress controller. | `string` | `"iac-terraform"` | no |
 | enable\_default\_tls | enable default tls (requires tls\_default\_secret) | `string` | `"false"` | no |
 | ingress\_class | name of the ingress class to route through this controller | `string` | `"nginx"` | no |
 | ingress\_type | Internal or Public. | `string` | `"Public"` | no |
