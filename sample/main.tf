@@ -58,6 +58,20 @@ module "aks" {
   }
 }
 
+resource "azurerm_public_ip" "main" {
+  name                = format("%s-ingress-ip", module.resource_group.name)
+  resource_group_name = module.aks.node_resource_group
+  location            = module.resource_group.location
+  allocation_method   = "Static"
+
+  sku               = "Standard"
+  domain_name_label = format("iac-terraform-%s", module.resource_group.random)
+
+  tags = {
+    iac = "terraform"
+  }
+}
+
 module "nginx" {
   source     = "../"
   depends_on = [module.aks]
@@ -67,6 +81,8 @@ module "nginx" {
   name                        = "ingress-nginx"
   namespace                   = "nginx-system"
   kubernetes_create_namespace = true
+
+  load_balancer_ip = azurerm_public_ip.main.ip_address
 }
 
 module "app" {
