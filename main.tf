@@ -31,8 +31,9 @@ resource "helm_release" "nginx" {
           loadBalancerIP = var.load_balancer_ip
           annotations = var.ingress_type == "Internal" ? {
             "service.beta.kubernetes.io/azure-load-balancer-internal" : "true"
+          } : {
             "service.beta.kubernetes.io/azure-dns-label-name" : var.dns_label
-          } : {}
+          }
         }
       }
     }),
