@@ -80,7 +80,7 @@ resource "azurerm_public_ip" "main" {
 
 ## Deploy NGINX Ingress with Static IP Address
 module "nginx" {
-  source     = "../"
+  source = "git::https://github.com/danielscholl-terraform/module-nginx-ingress?ref=v1.0.0"
   depends_on = [module.aks]
 
   providers = { helm = helm.aks }
