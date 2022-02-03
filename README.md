@@ -106,6 +106,9 @@ module "nginx" {
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:-----:|
 | additional\_yaml\_config | yaml config for helm chart to be processed last | `string` | `""` | no |
+| autoscaling | Enable autoscaling for the Ingress controller. | `bool` | `true` | no |
+| autoscaling\_max\_replicas | Minimum number of replicas for the Ingress controller. | `number` | `11` | no |
+| autoscaling\_min\_replicas | Minimum number of replicas for the Ingress controller. | `number` | `3` | no |
 | chart\_version | HELM Chart Version for nginx controller | `string` | `"4.0.6"` | no |
 | dns\_label | DNS label for building the FQDN of the Ingress controller. | `string` | `"iac-terraform"` | no |
 | enable\_default\_tls | enable default tls (requires tls\_default\_secret) | `string` | `"false"` | no |
