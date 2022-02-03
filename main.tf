@@ -19,6 +19,11 @@ resource "helm_release" "nginx" {
     yamlencode({
       controller = {
         replicaCount = var.replica_count
+        autoscaling = {
+          enabled     = var.autoscaling
+          minReplicas = var.autoscaling_min_replicas
+          maxReplicas = var.autoscaling_max_replicas
+        }
         ingressClass = var.ingress_class
         publishService = {
           enabled      = true

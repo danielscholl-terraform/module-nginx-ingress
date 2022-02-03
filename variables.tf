@@ -74,3 +74,22 @@ variable "dns_label" {
   type        = string
   default     = "iac-terraform"
 }
+
+variable "autoscaling" {
+  description = "Enable autoscaling for the Ingress controller."
+  type        = bool
+  default     = true
+}
+
+variable "autoscaling_min_replicas" {
+  description = "Minimum number of replicas for the Ingress controller."
+  type        = number
+  default     = 3
+}
+
+variable "autoscaling_max_replicas" {
+  description = "Minimum number of replicas for the Ingress controller."
+  type        = number
+  default     = 11
+}
+
